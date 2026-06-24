@@ -1,0 +1,16 @@
+---
+import { site } from '../data/site';
+---
+
+<footer class="site-footer">
+  <div class="container">
+    <p>
+      {site.name} · {site.location}
+      · <a href={`mailto:${site.email}`}>{site.email}</a>
+    </p>
+    <p>
+      <a href={site.linkedin} rel="noopener">LinkedIn</a>
+      · Led by <a href={site.founderUrl} rel="noopener">{site.founderName}</a>
+    </p>
+  </div>
+</footer>

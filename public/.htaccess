@@ -1,0 +1,17 @@
+# Astro directory build — extensionless URLs on Apache (Hostinger file-based hosting).
+# Not used by Website Builder; included in dist/ when deploying via SFTP/static hosting.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Trailing slash → index.html in directory
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^(.+)/$ $1/index.html [L]
+
+  # Extensionless path → /path/index.html (matches CloudFront URI rewrite logic)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !\.
+  RewriteRule ^(.+)$ $1/index.html [L]
+</IfModule>

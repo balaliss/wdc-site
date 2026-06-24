@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  site,
+  consultingOffer,
+  idealClient,
+  deliverables,
+  scopeBoundaries,
+} from '../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: consultingOffer.name,
+  provider: {
+    '@type': 'Organization',
+    name: site.name,
+    url: site.url,
+    email: site.email,
+  },
+  areaServed: 'United States',
+  serviceType: 'Fractional platform and integration program leadership',
+  description: consultingOffer.summary,
+  url: `${site.url}/services`,
+};
+---
+
+<BaseLayout
+  path="/services"
+  title={`${consultingOffer.name} — ${site.name}`}
+  description={consultingOffer.summary}
+  jsonLd={jsonLd}
+>
+  <section class="hero hero-compact">
+    <div class="container">
+      <p class="section-label">Consulting</p>
+      <h1>{consultingOffer.name}</h1>
+      <p class="tagline">{consultingOffer.headline}</p>
+      <p class="hero-lead">{consultingOffer.summary}</p>
+      <div class="offer-meta">
+        <span class="offer-pill">{consultingOffer.priceRange}</span>
+        <span class="offer-pill">{consultingOffer.hoursCap}</span>
+        <span class="offer-pill">{consultingOffer.pilot}</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href={site.discoveryMailto}>Book a 20-min discovery call</a>
+        <a class="btn btn-secondary" href="/work/transcarent">See proof: Transcarent</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Who this is for</p>
+      <h2>Ideal client</h2>
+      <ul class="check-list">
+        {idealClient.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <p class="section-label">Deliverables</p>
+      <h2>What you get, week by week</h2>
+      <div class="deliverables-table">
+        {
+          deliverables.map((row) => (
+            <div class="deliverable-row">
+              <div class="deliverable-week">{row.week}</div>
+              <div class="deliverable-body">
+                <strong>{row.artifact}</strong>
+                <span>{row.done}</span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container two-col">
+      <div>
+        <p class="section-label">In scope</p>
+        <h2>What we own</h2>
+        <ul class="check-list">
+          {scopeBoundaries.includes.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+      <div>
+        <p class="section-label">Out of scope</p>
+        <h2>What we do not do</h2>
+        <ul class="muted-list">
+          {scopeBoundaries.excludes.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-panel">
+        <h2>Ready to talk?</h2>
+        <p>
+          {consultingOffer.schedule}. {consultingOffer.capacity}.
+        </p>
+        <a class="btn btn-primary" href={site.discoveryMailto}>Book a 20-min discovery call</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

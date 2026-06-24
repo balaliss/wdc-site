@@ -1,0 +1,21 @@
+{
+  "name": "wdc-site",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "node deploy.mjs pages",
+    "deploy:dry": "node deploy.mjs pages --dry-run",
+    "status": "node deploy.mjs status"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.0",
+    "astro": "^5.16.0",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
+  }
+}

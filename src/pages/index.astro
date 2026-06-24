@@ -1,0 +1,170 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import {
+  site,
+  caseStudies,
+  howIWork,
+  consultingOffer,
+  idealClient,
+  deliverables,
+} from '../data/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ProfessionalService',
+      name: consultingOffer.name,
+      url: site.url,
+      email: site.email,
+      areaServed: 'United States',
+      serviceType: 'Integration and platform operating model consulting',
+      description: consultingOffer.summary,
+      founder: {
+        '@type': 'Person',
+        name: site.founderName,
+        url: site.founderUrl,
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout
+  path="/"
+  description="Fractional Integration OS for healthtech teams — intake, SLOs, escalation tiers, weekly operating cadence. Remote US."
+  jsonLd={jsonLd}
+>
+  <section class="hero">
+    <div class="container">
+      <p class="section-label">Integration OS · Remote US</p>
+      <h1>{consultingOffer.headline}</h1>
+      <p class="tagline">{consultingOffer.name} — {consultingOffer.hoursCap}</p>
+      <p class="hero-lead">
+        Wissahickon Data Collective helps healthtech and B2B SaaS teams that cannot hire a
+        full-time platform or integration lead yet. You get intake gates, SLO/SLA framework,
+        escalation tiers, and a weekly operating review rhythm — built from the same operating
+        model used across 20+ programs at Transcarent.
+      </p>
+      <div class="offer-meta">
+        <span class="offer-pill">{consultingOffer.priceRange}</span>
+        <span class="offer-pill">{consultingOffer.pilot}</span>
+        <span class="offer-pill">{consultingOffer.schedule}</span>
+      </div>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href={site.discoveryMailto}>Book a 20-min discovery call</a>
+        <a class="btn btn-secondary" href="/services">View offer details</a>
+        <a class="btn btn-secondary" href="#proof">See proof</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <p class="section-label">The problem</p>
+      <h2>When integration debt outruns headcount</h2>
+      <div class="problem-grid">
+        <div class="step">
+          <h3>Reactive firefighting</h3>
+          <p>Production issues and partner escalations eat the week. No intake standards or ownership map.</p>
+        </div>
+        <div class="step">
+          <h3>Heroics, not a system</h3>
+          <p>A senior IC or overwhelmed EM holds it together. Reliability targets live in people's heads.</p>
+        </div>
+        <div class="step">
+          <h3>Hiring is months away</h3>
+          <p>The FTE req is open but integration debt compounds every sprint. Waiting is not neutral.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Who we work with</p>
+      <h2>Ideal client profile</h2>
+      <ul class="check-list">
+        {idealClient.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <p class="section-label">Engagement</p>
+      <h2>First month deliverables</h2>
+      <div class="deliverables-table">
+        {
+          deliverables.map((row) => (
+            <div class="deliverable-row">
+              <div class="deliverable-week">{row.week}</div>
+              <div class="deliverable-body">
+                <strong>{row.artifact}</strong>
+                <span>{row.done}</span>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <p style="margin-top: 1.5rem; margin-bottom: 0">
+        <a href="/services">Full scope, boundaries, and pricing →</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="proof">
+    <div class="container">
+      <p class="section-label">Proof</p>
+      <h2>Case studies</h2>
+      <div class="card-grid">
+        {caseStudies.map((cs) => <CaseStudyCard {...cs} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <p class="section-label">Operating philosophy</p>
+      <h2>How we work</h2>
+      <div class="steps">
+        {howIWork.map((step) => (
+          <div class="step">
+            <h3>{step.title}</h3>
+            <p>{step.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <p class="section-label">Leadership</p>
+      <h2>Led by {site.founderName}</h2>
+      <p>
+        {site.founderName} owned delivery for 20+ integration programs with 30+ external partners at
+        Transcarent — SLO/SLA governance, observability dashboards, and a P0 warehouse migration.
+        Before that, a 14-person platform team at Persevere Now on B2B SaaS. PSPO I, AWS Cloud
+        Practitioner, Salesforce AI Associate. M.S. AI &amp; Machine Learning in progress (Eastern
+        University, resuming 2026).
+      </p>
+      <p style="margin-bottom: 0">
+        Personal portfolio: <a href={site.founderUrl} rel="noopener">{site.founderUrl.replace('https://', '')}</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-panel">
+        <h2>One client slot open</h2>
+        <p>
+          {consultingOffer.capacity}. {consultingOffer.schedule}.
+        </p>
+        <a class="btn btn-primary" href={site.discoveryMailto}>Book a 20-min discovery call</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

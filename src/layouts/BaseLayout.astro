@@ -1,0 +1,54 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string;
+  jsonLd?: Record<string, unknown>;
+}
+
+const {
+  title = site.title,
+  description = 'Fractional Integration OS for healthtech — intake, SLOs, escalation tiers, weekly operating cadence. Remote US.',
+  path = '/',
+  jsonLd,
+} = Astro.props;
+
+const canonical = new URL(path, site.url).href;
+const ogImage = new URL('/og-image.svg', site.url).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0c5c5c" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <title>{title}</title>
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container">
+        <Nav current={path} />
+      </div>
+    </header>
+    <slot />
+    <Footer />
+  </body>
+</html>

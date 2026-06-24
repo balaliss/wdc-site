@@ -1,0 +1,20 @@
+---
+interface Props {
+  title: string;
+  company: string;
+  meta: string;
+  metric: string;
+  excerpt: string;
+  href: string;
+}
+
+const { title, company, meta, metric, excerpt, href } = Astro.props;
+---
+
+<article class="card">
+  <p class="card-metric">{metric}</p>
+  <h3>{title}</h3>
+  <p class="card-meta">{company} · {meta}</p>
+  <p>{excerpt}</p>
+  <a class="card-link" href={href}>Read case study →</a>
+</article>

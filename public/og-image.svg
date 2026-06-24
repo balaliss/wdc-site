@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#faf9f7"/>
+  <rect x="0" y="0" width="1200" height="8" fill="#0c5c5c"/>
+  <text x="80" y="280" fill="#141414" font-family="Georgia, serif" font-size="72" font-weight="700">Steven Balalis</text>
+  <text x="80" y="360" fill="#0c5c5c" font-family="system-ui,sans-serif" font-size="34" font-weight="600">Engineering Manager · Technical Lead · Applied AI</text>
+  <text x="80" y="420" fill="#5a5650" font-family="system-ui,sans-serif" font-size="28">AI systems · data platforms · hands-on builder</text>
+  <text x="80" y="520" fill="#5a5650" font-family="system-ui,sans-serif" font-size="24">sbwebdev.net</text>
+</svg>

@@ -1,0 +1,26 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  current?: string;
+}
+
+const { current = '/' } = Astro.props;
+
+const links = [
+  { href: '/services', label: 'Services', match: '/services' },
+  { href: '/#proof', label: 'Proof', match: '/work' },
+  { href: site.discoveryMailto, label: 'Book a call', match: 'book' },
+];
+---
+
+<a class="logo" href="/">{site.name}</a>
+<nav class="site-nav" aria-label="Main">
+  {
+    links.map(({ href, label, match }) => (
+      <a href={href} aria-current={current.startsWith(match) && match !== 'book' ? 'page' : undefined}>
+        {label}
+      </a>
+    ))
+  }
+</nav>
