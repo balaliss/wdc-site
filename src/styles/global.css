@@ -266,8 +266,12 @@ p {
   box-shadow: var(--shadow);
 }
 
-.step h3 {
+.steps .step h3 {
   color: var(--accent);
+}
+
+.problem-grid .step h3 {
+  color: var(--text);
 }
 
 .pill-list {
