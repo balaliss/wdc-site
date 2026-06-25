@@ -2,16 +2,17 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import {
   site,
+  services,
   consultingOffer,
   idealClient,
-  deliverables,
   scopeBoundaries,
+  aiDifferentiator,
 } from '../data/site';
 
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
-  name: consultingOffer.name,
+  name: site.name,
   provider: {
     '@type': 'Organization',
     name: site.name,
@@ -19,7 +20,7 @@ const jsonLd = {
     email: site.email,
   },
   areaServed: 'United States',
-  serviceType: 'Fractional platform and integration program leadership',
+  serviceType: 'AI consulting, integration ops, and technical program management for healthtech',
   description: consultingOffer.summary,
   url: `${site.url}/services`,
 };
@@ -27,55 +28,62 @@ const jsonLd = {
 
 <BaseLayout
   path="/services"
-  title={`${consultingOffer.name} — ${site.name}`}
+  title={`Services — ${site.name}`}
   description={consultingOffer.summary}
   jsonLd={jsonLd}
 >
   <section class="hero hero-compact">
     <div class="container">
-      <p class="section-label">Consulting</p>
-      <h1>{consultingOffer.name}</h1>
-      <p class="tagline">{consultingOffer.headline}</p>
+      <p class="section-label">Services</p>
+      <h1>Three ways to engage</h1>
       <p class="hero-lead">{consultingOffer.summary}</p>
-      <div class="offer-meta">
-        <span class="offer-pill">{consultingOffer.priceRange}</span>
-        <span class="offer-pill">{consultingOffer.hoursCap}</span>
-        <span class="offer-pill">{consultingOffer.pilot}</span>
-      </div>
       <div class="hero-actions">
         <a class="btn btn-primary" href={site.discoveryMailto}>Book a 20-min discovery call</a>
-        <a class="btn btn-secondary" href="/work/transcarent">See proof: Transcarent</a>
       </div>
     </div>
   </section>
 
+  {services.map((svc) => (
+    <section class="section section-alt" id={svc.slug}>
+      <div class="container">
+        <p class="section-label">Service</p>
+        <h2>{svc.name}</h2>
+        <p class="tagline">{svc.tagline}</p>
+        <p>{svc.summary}</p>
+        <div class="offer-meta" style="margin-top: 1rem">
+          <span class="offer-pill">{svc.priceRange}</span>
+          <span class="offer-pill">{svc.engagement}</span>
+        </div>
+        <h3 style="margin-top: 2rem">What you get</h3>
+        <ul class="check-list">
+          {svc.deliverables.map((d) => <li>{d}</li>)}
+        </ul>
+        <p style="margin-top: 1.5rem"><strong>Best for:</strong> {svc.bestFor}</p>
+        <p style="margin-top: 1rem; margin-bottom: 0">
+          <a href={site.discoveryMailto}>Talk about this service →</a>
+        </p>
+      </div>
+    </section>
+  ))}
+
   <section class="section">
     <div class="container">
-      <p class="section-label">Who this is for</p>
-      <h2>Ideal client</h2>
-      <ul class="check-list">
-        {idealClient.map((item) => <li>{item}</li>)}
+      <p class="section-label">{aiDifferentiator.headline}</p>
+      <h2>AI is the delivery model, not the buzzword</h2>
+      <p>{aiDifferentiator.body}</p>
+      <ul class="check-list" style="margin-top: 1.5rem">
+        {aiDifferentiator.points.map((pt) => <li>{pt}</li>)}
       </ul>
     </div>
   </section>
 
   <section class="section section-alt">
     <div class="container">
-      <p class="section-label">Deliverables</p>
-      <h2>What you get, week by week</h2>
-      <div class="deliverables-table">
-        {
-          deliverables.map((row) => (
-            <div class="deliverable-row">
-              <div class="deliverable-week">{row.week}</div>
-              <div class="deliverable-body">
-                <strong>{row.artifact}</strong>
-                <span>{row.done}</span>
-              </div>
-            </div>
-          ))
-        }
-      </div>
+      <p class="section-label">Who this is for</p>
+      <h2>Ideal client</h2>
+      <ul class="check-list">
+        {idealClient.map((item) => <li>{item}</li>)}
+      </ul>
     </div>
   </section>
 
@@ -103,7 +111,7 @@ const jsonLd = {
       <div class="cta-panel">
         <h2>Ready to talk?</h2>
         <p>
-          {consultingOffer.schedule}. {consultingOffer.capacity}.
+          {consultingOffer.schedule}. {consultingOffer.capacity}. 20 minutes to see if there's a fit.
         </p>
         <a class="btn btn-primary" href={site.discoveryMailto}>Book a 20-min discovery call</a>
       </div>
