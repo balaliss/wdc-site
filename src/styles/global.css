@@ -135,6 +135,7 @@ p {
   text-decoration: none;
   font-size: 0.925rem;
   font-weight: 600;
+  padding-block: 10px;
 }
 
 .site-nav a:hover,
